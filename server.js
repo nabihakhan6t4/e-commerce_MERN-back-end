@@ -31,6 +31,7 @@ const allowedOrigins = [
 app.use(cors(corsOptions));
 
 const corsOptions = {
+  origin: "*",
   origin: function (origin, callback) {
     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
       callback(null, true);
@@ -49,7 +50,7 @@ const corsOptions = {
   credentials: true, // Allow cookies to be sent with requests
 };
 
-app.options('', cors(corsOptions))
+app.options("", cors(corsOptions));
 
 app.use(cors(corsOptions)); // Apply CORS middleware
 
