@@ -23,36 +23,33 @@ mongoose
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const allowedOrigins = [
-  "http://localhost:3000",
-  "https://ecommerce-backend-jgjwulyev-nabiha-khans-projects-954d6523.vercel.app/",
-];
 
-app.use(cors(corsOptions));
+app.use(cors());
+// app.use(cors(corsOptions));
 
-const corsOptions = {
-  origin: "*",
-  origin: function (origin, callback) {
-    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  methods: ["GET", "POST", "DELETE", "PUT"],
-  allowedHeaders: [
-    "Content-Type",
-    "Authorization",
-    "Cache-Control",
-    "Expires",
-    "Pragma",
-  ],
-  credentials: true, // Allow cookies to be sent with requests
-};
+// const corsOptions = {
+//   origin: "*",
+//   origin: function (origin, callback) {
+//     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error("Not allowed by CORS"));
+//     }
+//   },
+//   methods: ["GET", "POST", "DELETE", "PUT"],
+//   allowedHeaders: [
+//     "Content-Type",
+//     "Authorization",
+//     "Cache-Control",
+//     "Expires",
+//     "Pragma",
+//   ],
+//   credentials: true, // Allow cookies to be sent with requests
+// };
 
-app.options("", cors(corsOptions));
+// app.options("", cors(corsOptions));
 
-app.use(cors(corsOptions)); // Apply CORS middleware
+// app.use(cors(corsOptions)); // Apply CORS middleware
 
 // Middleware setup
 app.use(cookieParser());
@@ -69,5 +66,7 @@ app.use("/api/shop/order", shopOrderRouter);
 app.use("/api/shop/search", shopSearchRouter);
 app.use("/api/shop/review", shopReviewRouter);
 app.use("/api/common/feature", commonFeatureRouter);
-
+app.listen(PORT, () => {
+  console.log(`App listening on port ${PORT}`);
+});
 module.exports = app;
