@@ -25,35 +25,23 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors());
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
+const corsOptions = {
+  origin: "https://nabihakhan6t4.github.io",
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+};
 
-// const corsOptions = {
-//   origin: "*",
-//   origin: function (origin, callback) {
-//     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-//       callback(null, true);
-//     } else {
-//       callback(new Error("Not allowed by CORS"));
-//     }
-//   },
-//   methods: ["GET", "POST", "DELETE", "PUT"],
-//   allowedHeaders: [
-//     "Content-Type",
-//     "Authorization",
-//     "Cache-Control",
-//     "Expires",
-//     "Pragma",
-//   ],
-//   credentials: true, // Allow cookies to be sent with requests
-// };
+app.use(cors(corsOptions));
 
-// app.options("", cors(corsOptions));
-
-// app.use(cors(corsOptions)); // Apply CORS middleware
 
 // Middleware setup
 app.use(cookieParser());
 app.use(express.json());
+app.get("/", (req, res) => {
+  res.send("API is working!");
+});
 
 // Routes setup
 app.use("/api/auth", authRouter);
