@@ -25,11 +25,17 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 const corsOptions = {
-  origin: "https://nabihakhan6t4.github.io",
+  origin: [
+    "https://nabihakhan6t4.github.io", 
+    "https://server-lhxpbq9qp-nabiha-khans-projects-954d6523.vercel.app" 
+  ],
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
+
+app.use(cors(corsOptions)); // CORS middleware ko use karo
+
 
 app.use(cors(corsOptions));
 
